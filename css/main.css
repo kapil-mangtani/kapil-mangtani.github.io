@@ -12,6 +12,18 @@ body {
   color: #fff
 }
 
+#explore {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #001F3F;
+  }
+  100% {
+    background-color: #FF4136;
+  }
+}
 
 .btn {
   border-radius: 0;
@@ -649,8 +661,15 @@ h2 {
 
 #gmap {
   height:450px;  
+  position: relative;
+  overflow: hidden;
+    }
+#gmap iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
 }
-
 
 /*************************
 ******Contact CSS****
