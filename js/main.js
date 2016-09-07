@@ -35,21 +35,10 @@ jQuery(function($) {'use strict',
 
 	menuToggle();
 	
-	
+
 	// Carousel Auto Slide Off
 	$('#event-carousel, #twitter-feed, #sponsor-carousel ').carousel({
 		interval: false
-	});
-
-
-	// Contact form validation
-	var form = $('.contact-form');
-	form.submit(function () {'use strict',
-		$this = $(this);
-		$.post($(this).attr('action'), function(data) {
-			$this.prev().text(data.message).fadeIn().delay(3000).fadeOut();
-		},'json');
-		return false;
 	});
 
 	$( window ).resize(function() {
@@ -63,6 +52,27 @@ jQuery(function($) {'use strict',
 	    scrollOffset: 0,
 	    scrollThreshold: 0.3,
 	    filter: ':not(.no-scroll)'
+	});  
+
+
+	// sending wishes to email
+	var myform = $("form#myform");
+	myform.submit(function(event){
+		event.preventDefault();
+
+	  // Change to your service ID, or keep using the default service
+		var service_id = "default_service";
+	  	var template_id = "wish";
+
+	  	myform.find("button").text("Sending...");
+	  	emailjs.sendForm(service_id,template_id,"myform").then(function(){ 
+	    	alert("Sent!");
+	       	myform.find("button").text("Send");
+	    }, function(err) {
+	       alert("Send email failed!\r\n Response:\n " + JSON.stringify(err));
+	       myform.find("button").text("Send");
+	    });
+	  return false;
 	});
 
 });
